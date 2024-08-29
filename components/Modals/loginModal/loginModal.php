@@ -13,7 +13,7 @@
         </div>
         <div>
           <label>Enter Username</label>
-          <input type="password" placeholder="Password" username="password" />
+          <input type="password" placeholder="Password" name="password" />
         </div>
         <button type="submit">Login</button>
       </form>

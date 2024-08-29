@@ -1,0 +1,1 @@
+schema file name and object name must be the same

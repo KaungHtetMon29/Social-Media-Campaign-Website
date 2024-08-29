@@ -1,19 +1,9 @@
 {
-    "usertbl":{
+    "user":{
         "id":"int primary key auto_increment",
         "name": "varchar(255)",
         "email": "varchar(255)",
-        "password": "varchar(255)"
-    },
-    "userprofile":{
-        "id":"int primary key auto_increment",
-        "user_id":"int",
-        "address": "varchar(255)",
-        "phone": "varchar(255)",
-        "FK":{
-            "ref_field":"user_id",
-            "ref_table":"usertbl",
-            "ref_table_field":"id"
-        }
+        "password": "varchar(255)",
+        "dob": "date"
     }
 }

@@ -109,6 +109,10 @@
   color: rgb(129, 129, 129);
   font-weight: bold;
 }
+.modalform form input[type="date"] {
+  font-weight: bold;
+  color: rgb(129, 129, 129);
+}
 .modalheader {
   display: flex;
   justify-content: center;

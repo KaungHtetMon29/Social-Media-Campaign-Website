@@ -52,10 +52,10 @@
   const bdy = document.getElementsByTagName("body")[0];
   const element = document.createElement("div");
   loginbtn.addEventListener("click", (e) => {
-    addModal("components/Modals/loginModal/loginModal.html");
+    addModal("components/Modals/loginModal/loginModal.php");
   });
   btn.addEventListener("click", (e) => {
-    addModal("components/Modals/signupModal/signupModal.html");
+    addModal("components/Modals/signupModal/signupModal.php");
   });
 
   // console.log(nav.querySelectorAll("a")[0].textContent === "Home");

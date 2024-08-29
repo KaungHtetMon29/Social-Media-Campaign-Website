@@ -1,9 +1,5 @@
 <?php
 require 'database/dbutil.php';
-$dbconnection = new Dbconnect();
-$dbconnection->connect();
-$dbconnection->migrate();
-$dbconnection->createTable();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,9 +13,6 @@ $dbconnection->createTable();
 
 <body>
   <?php include 'components/navbar/navbar.php'; ?>
-  <?php
-  $dbconnection->disconnect();
-  ?>
   <div>
     <div class="primary">
       <?php include 'components/Hero/hero.php'; ?>
