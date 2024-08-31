@@ -1,6 +1,3 @@
-<?php
-$mysqli = require 'database/dbconnect.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -20,7 +20,6 @@ class Dbconnect
 
     private $connection;
     private $dbconnection;
-
     public function connect(): mysqli
     {
         $creatdb_query = "CREATE DATABASE if not exists $this->dbname";
@@ -91,19 +90,36 @@ class Dbconnect
         }
     }
 
-    public function insert(string $tblname, array $data): bool
+    public function insert(string $tblname, array $data, string $identifier = null): string
     {
         $tblcontents = $this->connection->query("select * from " . $tblname);
         $tblcontents = $tblcontents->fetch_all(MYSQLI_ASSOC);
-        $query = "INSERT INTO $tblname (";
-        foreach ($data as $key => $value) {
-            $query = $query . $value;
-            if ($key !== array_key_last($data)) {
-                $query = $query . ",";
+        if ($identifier !== null) {
+            foreach ($tblcontents as $row) {
+                if ($row[$identifier] === $data[$identifier]) {
+                    return "Record already exists";
+                }
             }
         }
-        print_r($tblcontents);
-        // print_r($query . ")");
-        return true;
+        $query = "INSERT INTO $tblname (";
+        foreach ($data as $key => $value) {
+            $query = $query . $key;
+            if ($key !== array_key_last($data)) {
+                $query = $query . ",";
+            } else {
+                $query = $query . ") values (";
+            }
+        }
+        foreach ($data as $key => $value) {
+            $query = $query . "'" . $value . "'";
+            if ($key !== array_key_last($data)) {
+                $query = $query . ",";
+            } else {
+                $query = $query . ");";
+            }
+        }
+        print_r($query);
+        $this->connection->query($query);
+        return "success";
     }
 }

@@ -1,5 +1,6 @@
 <?php
 require 'database/dbutil.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,7 @@ require 'database/dbutil.php';
 </head>
 
 <body>
+
   <?php include 'components/navbar/navbar.php'; ?>
   <div>
     <div class="primary">
@@ -25,9 +27,12 @@ require 'database/dbutil.php';
     </div>
     <?php include 'components/footer/footer.php'; ?>
   </div>
-
-
 </body>
+<?php
+if (isset($_SESSION["error"])) {
+  echo '<script>alert("' . $_SESSION["error"] . '")</script>';
+  unset($_SESSION["error"]);
+} ?>
 <script defer src="js/index.js" type="module"></script>
 
 </html>

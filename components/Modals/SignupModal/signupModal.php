@@ -10,11 +10,11 @@
         <div class="modalrow">
           <div>
             <label>Enter Username</label>
-            <input type="text" placeholder="Username" name="username" />
+            <input type="text" placeholder="Username" name="name" />
           </div>
           <div>
             <label>Enter Date of Birth</label>
-            <input type="date" name="Date of Birth" />
+            <input type="date" name="dob" />
           </div>
         </div>
         <div>
