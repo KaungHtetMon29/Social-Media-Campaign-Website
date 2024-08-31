@@ -1,3 +1,6 @@
+<?php
+session_start()
+  ?>
 <div class="modalcontainer" id="modal">
   <div class="modalcard">
     <button id="closebtn"><img src="img/cross.svg" alt="crossimg" /></button>

@@ -13,9 +13,15 @@
                 <img src="img/search_icon.png" alt="search" class="search_icon" />
             </div>
         </div>
-        <div>
-            <p href="login.php" class="login" id="loginbtn">Login</p>
-            <button class="register" id="registerbtn">Register</button>
-        </div>
+        <?php
+        if (!isset($_COOKIE["JWT"])) {
+            echo
+                '<div>
+                    <p href="login.php" class="login" id="loginbtn">Login</p>
+                    <button class="register" id="registerbtn">Register</button>
+                </div>';
+        }
+        ?>
+
     </div>
 </nav>

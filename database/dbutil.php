@@ -33,15 +33,9 @@ class Dbconnect
     {
         mysqli_close($this->connection);
     }
-    public function migrate(): void
-    {
-        // $json = file_get_contents('database/Schema/user.json');
-        // $data = json_decode($json, true);
-        // $key = array_keys($data);
-        // print_r($data["User"]);
-    }
     public function createTable(): void
     {
+
         $existingtables = array();
         $query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$this->dbname'";
         $result = $this->connection->query($query);
@@ -53,51 +47,53 @@ class Dbconnect
             // } else {
             //     echo "No tables found in the database.";
             // }
-            if (is_dir('database/Schema')) {
-                $files = scandir('database/Schema');
-                // print_r($files);
-                foreach ($files as $file) {
-                    if ($file !== "." && $file !== "..") {
-                        $json = file_get_contents('database/Schema/' . $file);
-                        $tblname = explode(".", $file)[0];
-                        $data = json_decode($json, true);
-                        $createquery = "create table if not exists ";
-                        if (!in_array($tblname, $existingtables)) {
-                            $table = $tblname;
-                            $columns = "";
-                            $counter = 0;
-                            print_r($data);
-                            $col = $data[$table];
-                            foreach ($col as $key => $value) {
-                                $counter++;
-                                if ($key === "FK") {
-                                    $columns = $columns . "FOREIGN KEY (" . $value["ref_field"] . ")" . " REFERENCES " . $value["ref_table"] . "(" . $value["ref_table_field"] . ")";
-                                } else {
-                                    $columns = $columns . $key . " " . $value;
-                                }
-                                if ($counter < count($col)) {
-                                    $columns = $columns . ",";
-                                }
-                            }
-                            echo $createquery . $table . " (" . $columns . ")" . "\n";
-                            $this->connection->query($createquery . $table . " (" . $columns . ")");
-                        }
+        }
 
+        print_r(is_dir(__DIR__ . '/Schema'));
+        if (is_dir(__DIR__ . '/Schema')) {
+            echo "create table";
+            $files = scandir(__DIR__ . '/Schema');
+            // print_r($files);
+            foreach ($files as $file) {
+                if ($file !== "." && $file !== "..") {
+                    $json = file_get_contents(__DIR__ . '/Schema/' . $file);
+                    $tblname = explode(".", $file)[0];
+                    $data = json_decode($json, true);
+                    $createquery = "create table if not exists ";
+                    if (!in_array($tblname, $existingtables)) {
+                        $table = $tblname;
+                        $columns = "";
+                        $counter = 0;
+                        print_r($data);
+                        $col = $data[$table];
+                        foreach ($col as $key => $value) {
+                            $counter++;
+                            if ($key === "FK") {
+                                $columns = $columns . "FOREIGN KEY (" . $value["ref_field"] . ")" . " REFERENCES " . $value["ref_table"] . "(" . $value["ref_table_field"] . ")";
+                            } else {
+                                $columns = $columns . $key . " " . $value;
+                            }
+                            if ($counter < count($col)) {
+                                $columns = $columns . ",";
+                            }
+                        }
+                        echo $createquery . $table . " (" . $columns . ")" . "\n";
+                        $this->connection->query($createquery . $table . " (" . $columns . ")");
                     }
+
                 }
             }
-
         }
     }
 
-    public function insert(string $tblname, array $data, string $identifier = null): string
+    public function insert(string $tblname, array $data, string $identifier = null): array
     {
         $tblcontents = $this->connection->query("select * from " . $tblname);
         $tblcontents = $tblcontents->fetch_all(MYSQLI_ASSOC);
         if ($identifier !== null) {
             foreach ($tblcontents as $row) {
                 if ($row[$identifier] === $data[$identifier]) {
-                    return "Record already exists";
+                    return ["type" => "email", "detail" => "exist"];
                 }
             }
         }
@@ -120,6 +116,6 @@ class Dbconnect
         }
         print_r($query);
         $this->connection->query($query);
-        return "success";
+        return ["type" => "success"];
     }
 }

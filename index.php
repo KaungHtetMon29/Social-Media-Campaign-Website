@@ -1,7 +1,17 @@
 <?php
 require 'database/dbutil.php';
+require 'utils/php/jwt.php';
 session_start();
+if (isset($_SESSION["signupmsg"])) {
+  if ($_SESSION["signupmsg"] === "Signup successful") {
+    $jwtobj = new JWTManager();
+    $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"]];
+    setcookie("JWT", $jwtobj->createToken($payload), time() + 3600);
+    unset($_SESSION["tempcredentials"]);
+  }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +23,6 @@ session_start();
 </head>
 
 <body>
-
   <?php include 'components/navbar/navbar.php'; ?>
   <div>
     <div class="primary">
@@ -28,11 +37,22 @@ session_start();
     <?php include 'components/footer/footer.php'; ?>
   </div>
 </body>
-<?php
-if (isset($_SESSION["error"])) {
-  echo '<script>alert("' . $_SESSION["error"] . '")</script>';
-  unset($_SESSION["error"]);
-} ?>
 <script defer src="js/index.js" type="module"></script>
+
+<?php
+if (isset($_SESSION["signupmsg"])) {
+  if ($_SESSION["signupmsg"] !== "Signup successful") {
+    echo '<script type="module">
+  import { addModal } from "./components/navbar/navbar.js";
+  addModal("components/Modals/signupModal/signupModal.php");
+  </script>';
+  }
+  echo '<script>
+  window.onload = function () {
+    alert("' . $_SESSION["signupmsg"] . '");
+  };
+  </script>';
+}
+unset($_SESSION["signupmsg"]); ?>
 
 </html>

@@ -21,6 +21,14 @@ body {
 .main {
   padding: 2rem 8rem;
 }
+.error{
+  border-width: 2px;
+  border-color: red;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
 .bg_gradient {
   background-color: #3bddba;
   background-image: linear-gradient(-45deg, #3bddba, #23c687);
@@ -53,3 +61,4 @@ footer a {
 footer p{
   color: var(--primary)
 }
+

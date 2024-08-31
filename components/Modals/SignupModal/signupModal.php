@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div class="modalcontainer">
   <div class="modalcard signup">
     <button id="closebtn"><img src="img/cross.svg" alt="crossimg" /></button>
@@ -6,20 +7,24 @@
         <h2>Signup</h2>
         <p>Stay safe from internet !</p>
       </div>
+
       <form action="components/Modals/SignupModal/signup.php" method="POST">
         <div class="modalrow">
           <div>
             <label>Enter Username</label>
-            <input type="text" placeholder="Username" name="name" />
+            <input type="text" placeholder="Username" name="name"
+              value="<?php echo isset($_SESSION["tempcredentials"]) ? htmlentities($_SESSION["tempcredentials"]["name"]) : "" ?>" />
           </div>
           <div>
             <label>Enter Date of Birth</label>
-            <input type="date" name="dob" />
+            <input type="date" name="dob" onkeypress="return false"
+              value="<?php echo isset($_SESSION["tempcredentials"]) ? htmlentities($_SESSION["tempcredentials"]["dob"]) : "" ?>" />
           </div>
         </div>
         <div>
           <label>Enter Email</label>
-          <input type="password" placeholder="Email" name="email" />
+          <input type="text" placeholder="Email" name="email"
+            value="<?php echo isset($_SESSION["tempcredentials"]) ? htmlentities($_SESSION["tempcredentials"]["email"]) : "" ?>" />
         </div>
         <div class="modalrow">
           <div>

@@ -33,24 +33,10 @@
       return element.textContent;
     });
   });
-  const addModal = (link) => {
-    fetch(link)
-      .then((response) => response.text())
-      .then((data) => {
-        element.innerHTML = data;
-        bdy.style.overflow = "hidden";
-        bdy.prepend(element);
-        const closebtn = document.getElementById("closebtn");
-        closebtn.addEventListener("click", () => {
-          closebtn.parentElement.parentElement.remove();
-          bdy.style.overflow = "auto";
-        });
-      });
-  };
+
   const btn = document.getElementById("registerbtn");
   const loginbtn = document.getElementById("loginbtn");
-  const bdy = document.getElementsByTagName("body")[0];
-  const element = document.createElement("div");
+
   loginbtn.addEventListener("click", (e) => {
     addModal("components/Modals/loginModal/loginModal.php");
   });
@@ -60,7 +46,23 @@
 
   // console.log(nav.querySelectorAll("a")[0].textContent === "Home");
 })();
-
+export const addModal = (link) => {
+  console.log("ran");
+  const bdy = document.getElementsByTagName("body")[0];
+  const element = document.createElement("div");
+  fetch(link)
+    .then((response) => response.text())
+    .then((data) => {
+      element.innerHTML = data;
+      bdy.style.overflow = "hidden";
+      bdy.prepend(element);
+      const closebtn = document.getElementById("closebtn");
+      closebtn.addEventListener("click", () => {
+        closebtn.parentElement.parentElement.remove();
+        bdy.style.overflow = "auto";
+      });
+    });
+};
 export const AdaptetiveNavbar = () => {
   const option = {
     root: null,
