@@ -12,7 +12,7 @@ session_start()
       <form action="components/Modals/loginModal/login.php" method="POST">
         <div>
           <label>Enter Username</label>
-          <input type="text" placeholder="Username" name="username" />
+          <input type="text" placeholder="email" name="email" />
         </div>
         <div>
           <label>Enter Username</label>

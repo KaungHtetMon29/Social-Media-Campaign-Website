@@ -118,4 +118,20 @@ class Dbconnect
         $this->connection->query($query);
         return ["type" => "success"];
     }
+    public function select_one(array $input, string $tblname)
+    {
+        $result = array();
+        $query = "select * from $tblname where ";
+        foreach ($input as $key => $value) {
+            $query = $query . $key . " = '" . $value . "'";
+            if ($key !== array_key_last($input)) {
+                $query = $query . " and ";
+            } else {
+                $query = $query . ";";
+            }
+        }
+        $result = $this->connection->query($query)->fetch_assoc();
+        return $result;
+    }
+
 }

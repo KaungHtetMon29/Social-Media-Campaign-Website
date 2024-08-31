@@ -37,12 +37,14 @@
   const btn = document.getElementById("registerbtn");
   const loginbtn = document.getElementById("loginbtn");
 
-  loginbtn.addEventListener("click", (e) => {
-    addModal("components/Modals/loginModal/loginModal.php");
-  });
-  btn.addEventListener("click", (e) => {
-    addModal("components/Modals/signupModal/signupModal.php");
-  });
+  loginbtn !== null &&
+    loginbtn.addEventListener("click", (e) => {
+      addModal("components/Modals/loginModal/loginModal.php");
+    });
+  btn !== null &&
+    btn.addEventListener("click", (e) => {
+      addModal("components/Modals/signupModal/signupModal.php");
+    });
 
   // console.log(nav.querySelectorAll("a")[0].textContent === "Home");
 })();

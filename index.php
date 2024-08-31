@@ -2,11 +2,13 @@
 require 'database/dbutil.php';
 require 'utils/php/jwt.php';
 session_start();
-if (isset($_SESSION["signupmsg"])) {
-  if ($_SESSION["signupmsg"] === "Signup successful") {
-    $jwtobj = new JWTManager();
-    $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"]];
-    setcookie("JWT", $jwtobj->createToken($payload), time() + 3600);
+if (isset($_SESSION["statusmsg"])) {
+  if ($_SESSION["statusmsg"] === "Signup successful") {
+    if (!isset($_COOKIE["JWT"])) {
+      $jwtobj = new JWTManager();
+      $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"]];
+      setcookie("JWT", $jwtobj->createToken($payload), time() + 3600);
+    }
     unset($_SESSION["tempcredentials"]);
   }
 }
@@ -38,21 +40,32 @@ if (isset($_SESSION["signupmsg"])) {
   </div>
 </body>
 <script defer src="js/index.js" type="module"></script>
-
 <?php
-if (isset($_SESSION["signupmsg"])) {
-  if ($_SESSION["signupmsg"] !== "Signup successful") {
-    echo '<script type="module">
-  import { addModal } from "./components/navbar/navbar.js";
-  addModal("components/Modals/signupModal/signupModal.php");
-  </script>';
-  }
-  echo '<script>
+if (isset($_SESSION["statusmsg"])) {
+  if ($_SESSION["statusmsg"] !== "Signup successful") {
+    switch ($_SESSION["statusmsg"]["form"]) {
+      case "signup":
+        echo '<script type="module">
+      import { addModal } from "./components/navbar/navbar.js";
+      addModal("components/Modals/signupModal/signupModal.php");
+      </script>';
+        break;
+      case "login":
+        echo '<script type="module">
+      import { addModal } from "./components/navbar/navbar.js";
+      addModal("components/Modals/loginModal/loginModal.php");
+      </script>';
+        break;
+    }
+    echo '<script>
   window.onload = function () {
-    alert("' . $_SESSION["signupmsg"] . '");
+    alert("' . $_SESSION["statusmsg"]["msg"] . '");
   };
   </script>';
+  }
+
 }
-unset($_SESSION["signupmsg"]); ?>
+unset($_SESSION["statusmsg"]);
+?>
 
 </html>

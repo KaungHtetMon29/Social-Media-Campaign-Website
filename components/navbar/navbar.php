@@ -22,6 +22,10 @@
                 </div>';
         }
         ?>
+        <!-- <div>
+            <p href="login.php" class="login" id="loginbtn">Login</p>
+            <button class="register" id="registerbtn">Register</button>
+        </div> -->
 
     </div>
 </nav>
