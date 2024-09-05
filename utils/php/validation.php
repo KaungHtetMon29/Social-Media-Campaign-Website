@@ -56,3 +56,26 @@ function validatePassword(string $form)
     }
 
 }
+
+function validateCaptcha(string $form)
+{
+    $secretKey = "6LfPxDUqAAAAAJAWdil0wyqn0pL96f9X107UDWkK";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    global $error;
+    if (isset($_POST['g-recaptcha-response'])) {
+        $captcha = $_POST['g-recaptcha-response'];
+    }
+    if (!$captcha) {
+        $_SESSION['statusmsg'] = ["form" => $form, "msg" => "Please check the captcha"];
+        header("Location: ../../../index.php");
+        exit();
+    }
+    $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) . '&response=' . urlencode($captcha);
+    $response = file_get_contents($url);
+    $responseKeys = json_decode($response, true);
+    if (!$responseKeys["success"]) {
+        $_SESSION['statusmsg'] = ["form" => $form, "msg" => "reCaptcha verification failed"];
+        header("Location: ../../../index.php");
+        exit();
+    }
+}

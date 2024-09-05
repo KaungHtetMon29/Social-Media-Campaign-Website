@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(230, 230, 230);
+}
+.layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: right;
+}
+.layout .content {
+  margin: 2rem 3rem;
+  width: 70%;
+  justify-self: right;
+  height: 100%;
+}
+.layout .profile {
+  font-size: 2.5rem;
+  color: white;
+  font-weight: 600;
+  p {
+    padding: 2rem 0rem;
+    margin: 0;
+  }
+}
+.layout .nav {
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(57, 57, 58);
+  width: 20%;
+  height: 100%;
+  padding: 3rem 3rem;
+  gap: 1.3rem;
+  position: fixed;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  a {
+    color: black;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 1.3rem 4rem;
+    font-weight: 500;
+    background-color: white;
+    border-radius: 1rem;
+  }
+}
+table {
+  width: 100%;
+  height: 100%;
+}
+tr,
+td,
+th {
+  padding: 1.5rem;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-collapse: collapse;
+}
+.card {
+  background-color: white;
+  height: 100%;
+  border-radius: 3rem;
+  padding: 3rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}

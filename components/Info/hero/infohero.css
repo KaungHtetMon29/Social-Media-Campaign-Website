@@ -21,7 +21,7 @@
   font-weight: normal;
   line-height: normal;
 }
-span {
+.info_hero span {
   background-color: var(--primary);
   padding: 1rem;
   border-radius: 1rem;

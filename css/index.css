@@ -18,6 +18,18 @@ body {
   margin: 0;
   padding: 0;
 }
+.google_translate :first-child :first-child {
+ background-color: transparent;
+ border-radius: 50%;
+ border: 0px;
+}
+.google_translate :first-child span {
+  
+  color: white;
+ }
+ .google_translate :first-child :first-child :first-child :last-child  {
+  color:white !important;
+ }
 .main {
   padding: 2rem 8rem;
 }
@@ -62,3 +74,6 @@ footer p{
   color: var(--primary)
 }
 
+.g-recaptcha{
+  align-items: center;
+}

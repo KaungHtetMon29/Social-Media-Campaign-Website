@@ -2,7 +2,6 @@
 include '../../../database/dbutil.php';
 include '../../../utils/php/validation.php';
 session_start();
-
 $usercredentials = [
     "email" => $_POST["email"],
     "password" => $_POST["password"]
@@ -28,7 +27,15 @@ function validate()
     }
     $_SESSION["tempcredentials"]["name"] = $userdata["name"];
     $_SESSION["statusmsg"] = "Signup successful";
-    header("Location: ../../../index.php");
+    switch ($userdata["type"]) {
+        case "admin":
+            header("Location:../../../admin/adminpanel.php");
+            break;
+        case "user":
+            header("Location: ../../../index.php");
+            break;
+    }
+
     exit();
 }
 

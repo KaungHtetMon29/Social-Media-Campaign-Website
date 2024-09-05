@@ -5,7 +5,7 @@
                 Empowering Teens, Safeguarding Their Digital World – Join Us in Creating a Safer Social Media
                 Experience.
             </p>
-            <button>Join Us</button>
+            <button id="joinus">Join Us</button>
         </div>
         <div></div>
     </section>

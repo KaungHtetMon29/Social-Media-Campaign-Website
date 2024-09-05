@@ -36,10 +36,14 @@
 
   const btn = document.getElementById("registerbtn");
   const loginbtn = document.getElementById("loginbtn");
-
+  const joinus = document.getElementById("joinus");
   loginbtn !== null &&
     loginbtn.addEventListener("click", (e) => {
       addModal("components/Modals/loginModal/loginModal.php");
+    });
+  joinus !== null &&
+    joinus.addEventListener("click", (e) => {
+      addModal("components/Modals/signupModal/signupModal.php");
     });
   btn !== null &&
     btn.addEventListener("click", (e) => {
@@ -49,19 +53,23 @@
   // console.log(nav.querySelectorAll("a")[0].textContent === "Home");
 })();
 export const addModal = (link) => {
-  console.log("ran");
   const bdy = document.getElementsByTagName("body")[0];
   const element = document.createElement("div");
   fetch(link)
     .then((response) => response.text())
     .then((data) => {
       element.innerHTML = data;
-      bdy.style.overflow = "hidden";
+      // bdy.style.overflow = "hidden";
       bdy.prepend(element);
+      if (typeof grecaptcha !== "undefined") {
+        grecaptcha.render(document.querySelector(".g-recaptcha"), {
+          sitekey: "6LfPxDUqAAAAANL2LhAkHcJ7OEVlxGwpRWVs0Y4w",
+        });
+        grecaptcha.style.margin = "0 auto";
+      }
       const closebtn = document.getElementById("closebtn");
       closebtn.addEventListener("click", () => {
         closebtn.parentElement.parentElement.remove();
-        bdy.style.overflow = "auto";
       });
     });
 };

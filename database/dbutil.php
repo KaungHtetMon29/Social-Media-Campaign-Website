@@ -114,7 +114,6 @@ class Dbconnect
                 $query = $query . ");";
             }
         }
-        print_r($query);
         $this->connection->query($query);
         return ["type" => "success"];
     }

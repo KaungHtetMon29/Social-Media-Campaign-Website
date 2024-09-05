@@ -36,14 +36,16 @@
             <input type="password" placeholder="Re-enter Password" name="repassword" />
           </div>
         </div>
+        <div class="g-recaptcha " data-type="image" data-sitekey="6LfPxDUqAAAAANL2LhAkHcJ7OEVlxGwpRWVs0Y4w">
+        </div>
         <button type="submit">Signup</button>
       </form>
     </div>
-    <hr />
+    <!-- <hr />
     <div class="modalfooter">
       <p>Already have an account?</p>
       <button>Login</button>
-    </div>
+    </div> -->
   </div>
   <div></div>
 </div>

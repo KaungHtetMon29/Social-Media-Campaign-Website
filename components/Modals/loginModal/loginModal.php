@@ -12,7 +12,8 @@ session_start()
       <form action="components/Modals/loginModal/login.php" method="POST">
         <div>
           <label>Enter Username</label>
-          <input type="text" placeholder="email" name="email" />
+          <input type="text" placeholder="email" name="email"
+            value="<?php echo isset($_SESSION["tempcredentials"]) ? htmlentities($_SESSION["tempcredentials"]["email"]) : "" ?>" />
         </div>
         <div>
           <label>Enter Username</label>
@@ -21,10 +22,10 @@ session_start()
         <button type="submit">Login</button>
       </form>
     </div>
-    <hr />
+    <!-- <hr />
     <div class="modalfooter">
       <p>Do not have account?</p>
       <button>Sign up</button>
-    </div>
+    </div> -->
   </div>
 </div>

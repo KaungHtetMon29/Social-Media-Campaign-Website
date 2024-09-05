@@ -1,12 +1,29 @@
+<?php
+require 'database/dbutil.php';
+require 'utils/php/jwt.php';
+require 'components/header/header.php';
+session_start();
+if (isset($_SESSION["statusmsg"])) {
+    if ($_SESSION["statusmsg"] === "Signup successful") {
+        if (!isset($_COOKIE["JWT"])) {
+            $jwtobj = new JWTManager();
+            $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"]];
+            setcookie("JWT", $jwtobj->createToken($payload), time() + 3600);
+            setcookie("credentials", json_encode(["name" => $_SESSION["tempcredentials"]["name"], "email" => $_SESSION["tempcredentials"]["email"]]), time() + 3600);
+            header("Refresh:0");
+        }
+        unset($_SESSION["tempcredentials"]);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information</title>
-    <link rel="stylesheet" href="css/index.css" />
-</head>
+<?php
+setheader("Information");
+?>
 
 <body>
     <?php include 'components/navbar/navbar.php'; ?>
@@ -22,7 +39,10 @@
         <?php include 'components/footer/footer.php'; ?>
     </div>
 </body>
-<script defer src="components/navbar/navbar.js" type="module"></script>
-<script defer src="js/info.js" type="module"></script>
+
+<?php include 'utils/g_translate_script/g_translate_scrip.php' ?>
+<?php
+unset($_SESSION["statusmsg"]);
+?>
 
 </html>

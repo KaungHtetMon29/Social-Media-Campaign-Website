@@ -1,6 +1,7 @@
 <?php
 require 'database/dbutil.php';
 require 'utils/php/jwt.php';
+require 'components/header/header.php';
 session_start();
 if (isset($_SESSION["statusmsg"])) {
   if ($_SESSION["statusmsg"] === "Signup successful") {
@@ -8,6 +9,8 @@ if (isset($_SESSION["statusmsg"])) {
       $jwtobj = new JWTManager();
       $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"]];
       setcookie("JWT", $jwtobj->createToken($payload), time() + 3600);
+      setcookie("credentials", json_encode(["name" => $_SESSION["tempcredentials"]["name"], "email" => $_SESSION["tempcredentials"]["email"]]), time() + 3600);
+      header("Refresh:0");
     }
     unset($_SESSION["tempcredentials"]);
   }
@@ -17,12 +20,10 @@ if (isset($_SESSION["statusmsg"])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMC</title>
-  <link rel="stylesheet" href="css/index.css" />
-</head>
+<?php
+setheader("SMC");
+?>
+
 
 <body>
   <?php include 'components/navbar/navbar.php'; ?>
@@ -37,9 +38,10 @@ if (isset($_SESSION["statusmsg"])) {
       <hr>
     </div>
     <?php include 'components/footer/footer.php'; ?>
+
   </div>
 </body>
-<script defer src="js/index.js" type="module"></script>
+<?php include 'utils/g_translate_script/g_translate_scrip.php' ?>
 <?php
 if (isset($_SESSION["statusmsg"])) {
   if ($_SESSION["statusmsg"] !== "Signup successful") {
