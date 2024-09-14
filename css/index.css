@@ -17,6 +17,7 @@ body {
   font-size: medium;
   margin: 0;
   padding: 0;
+  cursor: url('../img/cursor.png'), auto;
 }
 .google_translate :first-child :first-child {
  background-color: transparent;
@@ -76,4 +77,64 @@ footer p{
 
 .g-recaptcha{
   align-items: center;
+}
+
+.contact{
+  .mail_form_container{
+    color:white;
+    font-size:1.5rem;
+  }
+  .mailform{
+    gap:1rem;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    input{
+      padding:1rem .5rem;
+      width: 100%;
+      border-radius: 1rem;
+    }
+    textarea{
+      border: 0px;
+      height:20rem;
+      padding:1rem .5rem;
+      border-radius: 1rem;
+      width: 100%;
+    }
+  }
+  .herocontact{
+    color:var(--primary);
+    font-size: 1.5rem;
+    h1{
+      text-align: center;
+    }
+  }
+  .available_contacts{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    gap:3rem;
+    font-size:1.5rem;
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      p{
+        text-align: center;
+      }
+      h3{
+        text-align: center;
+      }
+      img{
+        width: 12rem;
+        height:12rem; 
+      }
+      
+    }
+  }
+  
 }

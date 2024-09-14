@@ -1,6 +1,7 @@
 <?php
 include '../../../database/dbutil.php';
 include '../../../utils/php/validation.php';
+include '../../../utils/php/jwt.php';
 session_start();
 
 $dbinstance = new Dbconnect();
@@ -16,8 +17,6 @@ $_SESSION["tempcredentials"] = $usercredentials;
 //     header("Location: ../../../index.php");
 //     exit();
 // }
-
-
 
 foreach (array_keys($usercredentials) as $key => $value) {
     switch ($value) {
@@ -40,25 +39,35 @@ foreach (array_keys($usercredentials) as $key => $value) {
 
 }
 ;
-// if (isset($_POST['g-recaptcha-response'])) {
-
-//     $captcha = $_POST['g-recaptcha-response'];
-
-// }
-// if (!$captcha) {
-//     $_SESSION['statusmsg'] = ["form" => $form, "msg" => "Please check the captcha"];
-//     header("Location: ../../../index.php");
-//     exit;
-// }
-// header("Location: ../../../index.php");
 unset($usercredentials['repassword']);
+unset($usercredentials["g-recaptcha-response"]);
 $usercredentials["password"] = password_hash($usercredentials['password'], PASSWORD_DEFAULT);
+
 $usercredentials["type"] = 'user';
 $status = $dbinstance->insert("user", $usercredentials, "email");
 if ($status['type'] !== "success") {
     $_SESSION['statusmsg'] = ["form" => "signup", "msg" => $error[$status["type"]][$status["detail"]]];
 } else {
+    echo ("ran");
     $_SESSION['statusmsg'] = "Signup successful";
+    $jwtobj = new JWTManager();
+    $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"], "role" => $_SESSION["tempcredentials"]["type"]];
+    setcookie("JWT", $jwtobj->createToken($payload), time() + 3600, "/", "", false, true);
+    setcookie(
+        "credentials",
+        json_encode(
+            [
+                "name" => $_SESSION["tempcredentials"]["name"],
+                "email" => $_SESSION["tempcredentials"]["email"],
+                "role" => $_SESSION["tempcredentials"]["type"]
+            ]
+        ),
+        time() + 3600,
+        "/",
+        "",
+        false,
+        true
+    );
 }
 header("Location: ../../../index.php");
 exit();

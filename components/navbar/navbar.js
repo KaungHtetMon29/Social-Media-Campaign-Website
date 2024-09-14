@@ -61,16 +61,16 @@ export const addModal = (link) => {
       element.innerHTML = data;
       // bdy.style.overflow = "hidden";
       bdy.prepend(element);
+      const closebtn = document.getElementById("closebtn");
+      closebtn.addEventListener("click", () => {
+        closebtn.parentElement.parentElement.remove();
+      });
       if (typeof grecaptcha !== "undefined") {
         grecaptcha.render(document.querySelector(".g-recaptcha"), {
           sitekey: "6LfPxDUqAAAAANL2LhAkHcJ7OEVlxGwpRWVs0Y4w",
         });
         grecaptcha.style.margin = "0 auto";
       }
-      const closebtn = document.getElementById("closebtn");
-      closebtn.addEventListener("click", () => {
-        closebtn.parentElement.parentElement.remove();
-      });
     });
 };
 export const AdaptetiveNavbar = () => {

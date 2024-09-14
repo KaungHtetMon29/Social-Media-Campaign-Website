@@ -1,6 +1,6 @@
 <?php
 
-function Layout(string $content)
+function Layout(string $content, array $user)
 {
     echo '<div class="layout">';
     include "components/sidenav/sidenav.php";

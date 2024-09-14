@@ -1,0 +1,9 @@
+{
+    "usermessages": {
+        "id":"int primary key auto_increment",
+        "sender_email":"varchar(255)",
+        "subject":"varchar(255)",
+        "message":"text",
+        "date":"date"
+    }
+}

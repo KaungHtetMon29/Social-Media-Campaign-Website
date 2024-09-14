@@ -31,6 +31,6 @@ class JWTManager
     public function decodeToken($token)
     {
         list(, $payload, ) = explode('.', $token);
-        return json_decode($this->base64UrlDecode($payload));
+        return json_decode($this->base64UrlDecode($payload), true);
     }
 }

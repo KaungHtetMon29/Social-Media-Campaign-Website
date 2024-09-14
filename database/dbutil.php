@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 // (function () {
 //     $host = "localhost";
 //     $username = "root";
@@ -10,7 +11,7 @@
 //     $connection = mysqli_connect($host, $username, $password, $dbname);
 //     return $connection;
 // });
-declare(strict_types=1);
+
 class Dbconnect
 {
     private $host = "localhost";
@@ -20,6 +21,12 @@ class Dbconnect
 
     private $connection;
     private $dbconnection;
+
+
+    public function __construct()
+    {
+
+    }
     public function connect(): mysqli
     {
         $creatdb_query = "CREATE DATABASE if not exists $this->dbname";
@@ -99,7 +106,7 @@ class Dbconnect
         }
         $query = "INSERT INTO $tblname (";
         foreach ($data as $key => $value) {
-            $query = $query . $key;
+            $query = $query . "`" . $key . "`";
             if ($key !== array_key_last($data)) {
                 $query = $query . ",";
             } else {
@@ -107,11 +114,32 @@ class Dbconnect
             }
         }
         foreach ($data as $key => $value) {
-            $query = $query . "'" . $value . "'";
+            $query = $query . "'" . $this->connection->real_escape_string($value) . "'";
             if ($key !== array_key_last($data)) {
                 $query = $query . ",";
             } else {
                 $query = $query . ");";
+            }
+        }
+
+        $this->connection->query($query);
+        return ["type" => "success"];
+    }
+
+    public function update(string $tblname, array $data, string $identifier = null): array
+    {
+        $tblcontents = $this->connection->query("select * from " . $tblname);
+        $identifier_data = $this->connection->real_escape_string($data["identifier"]);
+        unset($data["identifier"]);
+        $tblcontents = $tblcontents->fetch_all(MYSQLI_ASSOC);
+        $query = "UPDATE $tblname SET ";
+        foreach ($data as $key => $value) {
+            $escaped_value = $this->connection->real_escape_string($value);
+            $query = $query . $key . " = '" . $escaped_value . "'";
+            if ($key !== array_key_last($data)) {
+                $query = $query . ",";
+            } else {
+                $query = $query . " where " . $identifier . " = '" . $identifier_data . "';";
             }
         }
         $this->connection->query($query);
@@ -132,5 +160,48 @@ class Dbconnect
         $result = $this->connection->query($query)->fetch_assoc();
         return $result;
     }
+    public function select_all(string $tblname, array $fields = null, string $condition = null)
+    {
+        $query = "select ";
+        if ($fields !== null) {
+            for ($counter = 0; $counter < count($fields); $counter++) {
+                if ($counter === 0) {
+                    $query = $query . $fields[$counter] . ",";
+                } else if ($counter === count($fields) - 1) {
+                    $query = $query . $fields[$counter];
+                } else {
+                    $query = $query . $fields[$counter] . ",";
+                }
+            }
+        } else {
+            $query = $query . "*";
+        }
+
+        if ($condition !== null) {
+            $query = $query . " from $tblname where $condition;";
+        } else {
+            $query = $query . " from $tblname;";
+        }
+        $result = $this->connection->query($query)->fetch_all(MYSQLI_ASSOC);
+        return $result;
+
+    }
+    public function delete_one(string $tblname, array $input)
+    {
+
+        $query = "delete from $tblname where ";
+        foreach ($input as $key => $value) {
+            $query = $query . $key . " = '" . $value . "'";
+            if ($key !== array_key_last($input)) {
+                $query = $query . " and ";
+            } else {
+                $query = $query . ";";
+            }
+        }
+        if ($this->connection->query($query)) {
+            return ["type" => "success"];
+        }
+    }
+
 
 }

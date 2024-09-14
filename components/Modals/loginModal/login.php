@@ -1,6 +1,7 @@
 <?php
 include '../../../database/dbutil.php';
 include '../../../utils/php/validation.php';
+include '../../../utils/php/jwt.php';
 session_start();
 $usercredentials = [
     "email" => $_POST["email"],
@@ -26,7 +27,26 @@ function validate()
         exit();
     }
     $_SESSION["tempcredentials"]["name"] = $userdata["name"];
+    $_SESSION["tempcredentials"]["type"] = $userdata["type"];
     $_SESSION["statusmsg"] = "Signup successful";
+    $jwtobj = new JWTManager();
+    $payload = ["email" => $_SESSION["tempcredentials"]["email"], "name" => $_SESSION["tempcredentials"]["name"], "role" => $_SESSION["tempcredentials"]["type"]];
+    setcookie("JWT", $jwtobj->createToken($payload), time() + 3600, "/", "", false, true);
+    setcookie(
+        "credentials",
+        json_encode(
+            [
+                "name" => $_SESSION["tempcredentials"]["name"],
+                "email" => $_SESSION["tempcredentials"]["email"],
+                "role" => $_SESSION["tempcredentials"]["type"]
+            ]
+        ),
+        time() + 3600,
+        "/",
+        "",
+        false,
+        true
+    );
     switch ($userdata["type"]) {
         case "admin":
             header("Location:../../../admin/adminpanel.php");

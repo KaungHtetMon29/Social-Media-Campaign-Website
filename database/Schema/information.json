@@ -1,0 +1,9 @@
+{
+    "information":{
+        "id":"int primary key auto_increment",
+        "title":"varchar(255)",
+        "image":"longblob",
+        "content":"text",
+        "participating_users":"int default 0"
+    }
+}

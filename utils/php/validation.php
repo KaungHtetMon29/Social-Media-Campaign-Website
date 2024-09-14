@@ -1,5 +1,8 @@
 <?php
 $error = [
+    "title" => ["empty" => "Title cannot be empty"],
+    "content" => ["empty" => "content cannot be empty"],
+    "image" => ["empty" => "image cannot be empty"],
     "name" => ["empty" => "Name cannot be empty"],
     "email" => [
         "empty" => "Email can't be empty",
@@ -14,45 +17,44 @@ $error = [
     ],
     "dob" => ["empty" => "Date of birth cannot be empty"]
 ];
-
-function validateEmpty(string $input, string $key, string $form)
+function redirect($location)
+{
+    header("Location: $location");
+    exit();
+}
+function validateEmpty(string $input, string $key, string $form, string $location = '../../../index.php')
 {
     global $error;
     if (strlen($input) === 0) {
         $_SESSION['statusmsg'] = ["form" => $form, "msg" => $error[$key]["empty"]];
-        header("Location: ../../../index.php");
-        exit();
+        redirect($location);
     }
 
 }
-function validateEmail(string $form)
+function validateEmail(string $form, string $location = '../../../index.php')
 {
     global $error;
     if (strlen($_POST["email"]) === 0) {
-        validateEmpty($_POST["email"], "email", $form);
+        validateEmpty($_POST["email"], "email", $form, $location);
     } else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         $_SESSION['statusmsg'] = ["form" => $form, "msg" => $error["email"]["invalid"]];
-        header("Location: ../../../index.php");
-        exit();
+        redirect($location);
     }
 }
-function validatePassword(string $form)
+function validatePassword(string $form, string $location = '../../../index.php')
 {
     global $error;
     if ($_POST["password"] !== $_POST["repassword"]) {
         $_SESSION['statusmsg'] = ["form" => $form, "msg" => $error["password"]["nomatch"]];
-        header("Location: ../../../index.php");
-        exit();
+        redirect($location);
     } else if (strlen($_POST["password"]) === 0) {
-        validateEmpty($_POST["password"], "password", $form);
+        validateEmpty($_POST["password"], "password", $form, $location);
     } else if (strlen($_POST["password"]) < 8) {
         $_SESSION['statusmsg'] = ["form" => $form, "msg" => $error["password"]["invalid"]];
-        header("Location: ../../../index.php");
-        exit();
+        redirect($location);
     } else if (!preg_match("/[A-Z]/", $_POST["password"]) || !preg_match("/[a-z]/", $_POST["password"]) || !preg_match("/[0-9]/", $_POST["password"]) || !preg_match("/[^A-Za-z0-9]/", $_POST["password"])) {
         $_SESSION['statusmsg'] = ["form" => $form, "msg" => $error["password"]["weak"]];
-        header("Location: ../../../index.php");
-        exit();
+        redirect($location);
     }
 
 }
