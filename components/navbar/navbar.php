@@ -18,11 +18,22 @@ if (isset($_GET["logout"])) {
             <a href="contact.php" class="nav_ani_op1">Contact</a>
             <a href="legislation.php" class="nav_ani_op1">Legislation and Guidance</a>
             <?php
-            if (explode('.', basename($_SERVER['PHP_SELF']))[0] === "popular") {
+            if (
+                explode('.', basename($_SERVER['PHP_SELF']))[0] === "popular" ||
+                explode('.', basename($_SERVER['PHP_SELF']))[0] === "index"
+            ) {
                 echo '
                 <div class="search">
-                    <input placeholder="search" />
-                    <img src="img/search_icon.png" alt="search" class="search_icon" />
+                    <form action="' . (explode(
+                        '.',
+                        basename($_SERVER['PHP_SELF'])
+                    )[0] === "index" ? "popular.php" : "") . '" method="get">
+                        <input type="search" placeholder="find popular apps " 
+                        name="input" value="' . (isset($_GET["input"]) ? htmlspecialchars($_GET["input"]) : "") . '"/>
+                        <button type="submit" class="searchbtn">
+                            search
+                        </button>
+                    </form>
                 </div>';
             }
             ?>

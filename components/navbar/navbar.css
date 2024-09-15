@@ -71,6 +71,22 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  form{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .searchbtn {
+    font-size: 1.2rem;
+    font-weight: normal;
+    background-color: white;
+    border-radius: 3rem;
+    color:--var(primary);
+    height: 100%;
+    padding: .5rem .5rem; !important
+    cursor: pointer; !important
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  }
 }
 .nav_ani_op1 {
   opacity: 1;

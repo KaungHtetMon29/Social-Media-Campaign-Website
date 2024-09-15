@@ -138,3 +138,7 @@ footer p{
   }
   
 }
+.bdygen_img{
+  border-radius: 5rem;
+  object-fit:contain;
+}

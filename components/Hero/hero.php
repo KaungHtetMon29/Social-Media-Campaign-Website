@@ -7,7 +7,9 @@
             </p>
             <button id="joinus">Join Us</button>
         </div>
-        <div></div>
+        <div>
+            <img src="img/hero.png" alt="heroimg" width="100%">
+        </div>
     </section>
     <div class="supporters">
         <h3>Our Supporters</h3>
