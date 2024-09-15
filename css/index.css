@@ -142,3 +142,6 @@ footer p{
   border-radius: 5rem;
   object-fit:contain;
 }
+.flipped_img{
+  transform: scaleX(-1);
+}

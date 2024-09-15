@@ -43,9 +43,9 @@ class BodyGen
                 <section class="main infocontent saferInternetcontent">';
                 if (!$left) {
                     if ($this->img) {
-                        echo '<img src="' . $content["image"] . '" width="50%" class="bdygen_img">';
+                        echo '<img src="' . $content["image"] . '" width="50%" class="bdygen_img flipped_img">';
                     } else {
-                        echo '<iframe src="https://www.youtube.com/embed/i0K40f-6mLs?list=RDi0K40f-6mLs" width="50%" height="null"
+                        echo '<iframe src="https://www.youtube.com/embed/i0K40f-6mLs?list=RDi0K40f-6mLs" width="50%" height="null" class="bdygen_img"
                         frameborder="0"></iframe>';
                     }
                 }
@@ -61,10 +61,10 @@ class BodyGen
                 </div>';
                 if ($left) {
                     if ($this->img) {
-                        echo '<img src="' . $content["image"] . '" width="50%" class="bdygen_img">';
+                        echo '<img src="' . $content["image"] . '" width="50%" class="bdygen_img ">';
                     } else {
                         echo '<iframe src="https://www.youtube.com/embed/i0K40f-6mLs?list=RDi0K40f-6mLs" width="50%" height="null"
-                            frameborder="0"></iframe>';
+                            class="bdygen_img" frameborder="0"></iframe>';
                     }
                 }
                 echo '</section>
