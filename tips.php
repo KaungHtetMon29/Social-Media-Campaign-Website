@@ -13,7 +13,7 @@ $contents = [
      such as cyberbullying or pressure to conform to social media trends. Through open dialogue, parents can offer guidance without being intrusive, 
      helping teens navigate the digital world responsibly. Encouraging honest conversations also gives parents the opportunity to address any concerns early 
      and offer advice on handling tricky situations, ultimately creating a safer and more supportive online experience for teens.",
-        "image" => "img/OC.jpg",
+        "image" => "img/OC.png",
     ],
     [
         "title" => "Set Time Limits",
@@ -97,6 +97,7 @@ setheader("Tips");
 
 <body>
     <?php include 'components/navbar/navbar.php'; ?>
+    <?php include 'components/overlay/overlay.php'; ?>
     <?php
     $bdygen = new BodyGen($contents);
     $bdygen->generateBody(true);

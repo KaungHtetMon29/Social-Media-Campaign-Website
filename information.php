@@ -31,6 +31,7 @@ setheader("Information");
 
 <body>
     <?php include 'components/navbar/navbar.php'; ?>
+    <?php include 'components/overlay/overlay.php'; ?>
     <div>
         <?php include 'components/Info/hero/InfoHero.php' ?>
         <?php

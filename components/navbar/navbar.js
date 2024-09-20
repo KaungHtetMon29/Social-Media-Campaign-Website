@@ -35,18 +35,29 @@
   });
 
   const btn = document.getElementById("registerbtn");
+  const mbtn = document.getElementById("mobileregisterbtn");
   const loginbtn = document.getElementById("loginbtn");
+  const mloginbtn = document.getElementById("mobileloginbtn");
   const joinus = document.getElementById("joinus");
   loginbtn !== null &&
     loginbtn.addEventListener("click", (e) => {
       addModal("components/Modals/loginModal/loginModal.php");
     });
+  mloginbtn !== null &&
+    mloginbtn.addEventListener("click", (e) => {
+      addModal("components/Modals/loginModal/loginModal.php");
+    });
+
   joinus !== null &&
     joinus.addEventListener("click", (e) => {
       addModal("components/Modals/signupModal/signupModal.php");
     });
   btn !== null &&
     btn.addEventListener("click", (e) => {
+      addModal("components/Modals/signupModal/signupModal.php");
+    });
+  mbtn !== null &&
+    mbtn.addEventListener("click", (e) => {
       addModal("components/Modals/signupModal/signupModal.php");
     });
 

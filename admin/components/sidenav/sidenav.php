@@ -19,6 +19,9 @@ global $user;
     <a href="adminpanel.php?tab=popularapp" class=<?php echo $query === "popularapp" ? 'selected_tab' : 'tab' ?>>Popular
         App
     </a>
+    <a href="adminpanel.php?tab=usermessages" class=<?php echo $query === "usermessages" ? 'selected_tab' : 'tab' ?>> View
+        Message
+    </a>
     <a href="adminpanel.php?logout=true" class="pd tab">Logout</a>
     <!-- <a href="#">Posts</a>
     <a href="#">Comments</a> -->

@@ -24,11 +24,9 @@ if (isset($_GET['input'])) {
     } else {
         $contents = $dbinstance->select_all("popularapp", ["id", "appname", "content", "image"]);
     }
-
 } else {
     $contents = $dbinstance->select_all("popularapp", ["id", "appname", "content", "image"]);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +37,7 @@ setheader("Popular");
 
 <body>
     <?php include 'components/navbar/navbar.php'; ?>
+    <?php include 'components/overlay/overlay.php'; ?>
     <?php
     $bdygen = new BodyGen($contents, true, false, ['id', 'appname', 'content', 'image']);
     $bdygen->generateBody();
@@ -53,7 +52,9 @@ if (isset($_SESSION["statusmsg"])) {
     echo '<script>
     window.onload = function () {
       alert("' . $_SESSION["statusmsg"]["msg"] . '");
+      window.location.href = "popular.php";
     };
+    
     </script>';
     unset($_SESSION["statusmsg"]);
 }

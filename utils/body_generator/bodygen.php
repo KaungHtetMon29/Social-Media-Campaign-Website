@@ -45,7 +45,7 @@ class BodyGen
                     if ($this->img) {
                         echo '<img src="' . $content["image"] . '" width="50%" class="bdygen_img flipped_img">';
                     } else {
-                        echo '<iframe src="https://www.youtube.com/embed/i0K40f-6mLs?list=RDi0K40f-6mLs" width="50%" height="null" class="bdygen_img"
+                        echo '<iframe src="' . $content["vid"] . '" class="bdygen_img"
                         frameborder="0"></iframe>';
                     }
                 }
@@ -63,7 +63,7 @@ class BodyGen
                     if ($this->img) {
                         echo '<img src="' . $content["image"] . '" width="50%" class="bdygen_img ">';
                     } else {
-                        echo '<iframe src="https://www.youtube.com/embed/i0K40f-6mLs?list=RDi0K40f-6mLs" width="50%" height="null"
+                        echo '<iframe src="' . $content["vid"] . '"
                             class="bdygen_img" frameborder="0"></iframe>';
                     }
                 }

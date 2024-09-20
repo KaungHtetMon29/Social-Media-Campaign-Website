@@ -38,6 +38,7 @@ setheader("Legislation and Guidance");
 
 <body>
     <?php include 'components/navbar/navbar.php'; ?>
+    <?php include 'components/overlay/overlay.php'; ?>
     <?php
     $bdygen = new BodyGen($contents);
     $bdygen->generateBody();

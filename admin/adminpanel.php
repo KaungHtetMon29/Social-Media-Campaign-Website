@@ -8,6 +8,7 @@ require './components/View/contentView.php';
 require './components/View/popularAppView.php';
 require 'components/Modal/createUserModal.php';
 require 'components/Modal/createContentModal.php';
+require './components/View/messageView.php';
 
 
 session_start();
@@ -94,9 +95,11 @@ if (isset($_GET["email"]) && !isset($_GET["update"])) {
         case 'popularapp':
             Layout(popularAppView($dbconnection), $user);
             break;
+        case 'usermessages':
+            Layout(messageView($dbconnection), $user);
+            break;
 
     }
-
     ?>
 </body>
 <?php

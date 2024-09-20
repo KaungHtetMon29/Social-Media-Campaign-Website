@@ -15,6 +15,7 @@ setheader("SMC");
 
 <body>
   <?php include 'components/navbar/navbar.php'; ?>
+  <?php include 'components/overlay/overlay.php'; ?>
   <div>
     <div class="primary">
       <?php include 'components/Hero/hero.php'; ?>
