@@ -1,0 +1,8 @@
+{
+    "test":{
+        "id":"int primary key auto_increment",
+        "appname":"varchar(255)",
+        "image":"longblob",
+        "content":"text"
+    }
+}

@@ -6,7 +6,7 @@ session_start();
 
 $dbinstance = new Dbconnect();
 $connection = $dbinstance->connect();
-$usercredentials = $_POST;
+$usercredentials = array_map('htmlspecialchars', $_POST);
 
 $_SESSION["tempcredentials"] = $usercredentials;
 // if (strlen($_POST["name"]) === 0) {

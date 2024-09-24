@@ -57,6 +57,7 @@ function generate_contacts($content)
                 <textarea name="msg" id="" cols="30" rows="10" placeholder="Message" required></textarea>
                 <button type="submit">Send</button>
             </form>
+            <a href="privacypolicy.php">Read Privacy Policy</a>
         </div>
     </div>
     <?php include 'components/footer/footer.php'; ?>
@@ -73,7 +74,7 @@ function generate_contacts($content)
     };
 </script>
 <?php include 'utils/g_translate_script/g_translate_scrip.php' ?>
-<script defer src="components/navbar/navbar.js" type="module"></script>
+<script defer src=" components/navbar/navbar.js" type="module"></script>
 <script defer src="js/index.js" type="module"></script>
 
 

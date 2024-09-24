@@ -4,8 +4,8 @@ include '../../../utils/php/validation.php';
 include '../../../utils/php/jwt.php';
 session_start();
 $usercredentials = [
-    "email" => $_POST["email"],
-    "password" => $_POST["password"]
+    "email" => htmlspecialchars($_POST["email"]),
+    "password" => htmlspecialchars($_POST["password"])
 ];
 $_SESSION["tempcredentials"] = $usercredentials;
 unset($_SESSION["tempcredentials"]["password"]);
@@ -23,6 +23,12 @@ function validate()
     }
     if (!password_verify($usercredentials["password"], $userdata["password"])) {
         $_SESSION['statusmsg'] = ["form" => "login", "msg" => "Wrong Password"];
+        if (!isset($_SESSION['attempts'])) {
+            $_SESSION['attempts'] = 1;
+        } else {
+            $_SESSION['attempts'] = $_SESSION['attempts'] + 1;
+        }
+
         header("Location: ../../../index.php");
         exit();
     }

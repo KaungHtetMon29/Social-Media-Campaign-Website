@@ -15,7 +15,8 @@ function createContentModal($type = false, $dbinstance)
         '<div class="modalbg">
             <div class="admincard">
                 <div class="card-header">
-                    <h2>Create User</h2>
+                    <h2>' . (array_key_exists("update_content", $params) ? "Update " . $params["tab"] . ""
+            : "Create " . $params["tab"] . "") . '</h2>
                     <form action="adminpanel.php" method="POST">
                         <button type="submit" name="close" value="' . $params["tab"] . '" class="adminmodal_close_btn">
                             <img src="../img/cross.svg" alt="button">

@@ -14,7 +14,7 @@ global $user;
     </div>
     <!-- <a href="#">Admin</a> -->
     <a href="adminpanel.php?tab=user" class=<?php echo $query === "user" ? 'selected_tab' : 'tab' ?>>Users</a>
-    <a href="adminpanel.php?tab=admin" class=<?php echo $query === "admin" ? 'selected_tab' : 'tab' ?>>Admins</a>
+    <a href="adminpanel.php?tab=admin" class=<?php echo $query === "admin" ? 'selected_tab' : 'tab' ?>>Admin</a>
     <a href="adminpanel.php?tab=information" class=<?php echo $query === "information" ? 'selected_tab' : 'tab' ?>>Information</a>
     <a href="adminpanel.php?tab=popularapp" class=<?php echo $query === "popularapp" ? 'selected_tab' : 'tab' ?>>Popular
         App

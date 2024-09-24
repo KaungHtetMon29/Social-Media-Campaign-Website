@@ -7,21 +7,6 @@ class BodyGen
     private $vid;
     private $cols;
     private array $contents;
-    // public function __construct($img = null, $vid = null, $title = null, $content = null)
-    // {
-    //     if ($img === null || strlen($img) === 0) {
-    //         $this->img = null;
-    //         $this->vid = $vid;
-    //         $this->title = $title;
-    //         $this->content = $content;
-    //     } else {
-    //         $this->vid = null;
-    //         $this->img = $img;
-    //         $this->title = $title;
-    //         $this->content = $content;
-    //     }
-
-    // }
     public function __construct(array $contents, bool $img = true, bool $vid = false, array $cols = ["id", "title", "content", "image"])
     {
         $this->contents = $contents;

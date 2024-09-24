@@ -13,7 +13,7 @@
           <div>
             <label>Enter Username</label>
             <input type="text" placeholder="Username" name="name"
-              value="<?php echo isset($_SESSION["tempcredentials"]) ? htmlentities($_SESSION["tempcredentials"]["name"]) : "" ?>" />
+              value="<?php echo isset($_SESSION["tempcredentials"]["name"]) ? htmlentities($_SESSION["tempcredentials"]["name"]) : "" ?>" />
           </div>
           <div>
             <label>Enter Date of Birth</label>

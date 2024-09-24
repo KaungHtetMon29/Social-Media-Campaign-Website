@@ -19,7 +19,26 @@ session_start()
           <label>Enter Username</label>
           <input type="password" placeholder="Password" name="password" />
         </div>
-        <button type="submit">Login</button>
+        <?php
+        if (isset($_SESSION["attempts"]) && $_SESSION["attempts"] >= 3) {
+          if (!isset($_SESSION["lockout_time"])) {
+            $_SESSION["lockout_time"] = time();
+          }
+          $lockout_duration = 10 * 60; // 10 minutes in seconds
+          $time_since_lockout = time() - $_SESSION["lockout_time"];
+          if ($time_since_lockout < $lockout_duration) {
+            echo "<p>You have been locked out due to multiple failed login attempts. Please try again after 10 minutes.</p>";
+          } else {
+            // Reset attempts after lockout duration
+            unset($_SESSION["attempts"]);
+            unset($_SESSION["lockout_time"]);
+            echo '<button type="submit">Login</button>';
+          }
+        } else {
+          echo '<button type="submit">Login</button>';
+        }
+        ?>
+
       </form>
     </div>
     <!-- <hr />

@@ -2,7 +2,6 @@
 require '../../database/dbutil.php';
 //we can't use mail server in localhost
 //so we store user message on database.
-print_r($_POST);
 list($sender_email, $subject, $message) = [$_POST["email"], $_POST["subject"], $_POST["msg"]];
 $dbconnection = new Dbconnect();
 $dbconnection->connect();

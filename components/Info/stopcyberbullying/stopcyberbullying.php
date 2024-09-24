@@ -16,11 +16,4 @@
         </div>
         <div>img</div>
     </section>
-    <!-- <div class="supporters">
-        <h3>Our Supporters</h3>
-        <div>
-            <img src="img/aws.png" alt="hero image" />
-            <img src="img/Google.png" alt="hero image" />
-        </div>
-    </div> -->
 </div>

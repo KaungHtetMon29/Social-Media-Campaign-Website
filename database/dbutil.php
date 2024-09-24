@@ -1,23 +1,12 @@
 <?php
 declare(strict_types=1);
-// (function () {
-//     $host = "localhost";
-//     $username = "root";
-//     $password = "";
-//     $dbname = "testdb";
-//     $creatdb_query = "CREATE DATABASE if not exists $dbname";
-//     $connect = new mysqli($host, $username, $password);
-//     $connect->query($creatdb_query);
-//     $connection = mysqli_connect($host, $username, $password, $dbname);
-//     return $connection;
-// });
 
 class Dbconnect
 {
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $dbname = "testdb";
+    private $dbname = "smc";
 
     private $connection;
     private $dbconnection;
@@ -51,14 +40,8 @@ class Dbconnect
             while ($row = $result->fetch_assoc()) {
                 array_push($existingtables, $row["TABLE_NAME"]);
             }
-            // } else {
-            //     echo "No tables found in the database.";
-            // }
         }
-
-        print_r(is_dir(__DIR__ . '/Schema'));
         if (is_dir(__DIR__ . '/Schema')) {
-            echo "create table";
             $files = scandir(__DIR__ . '/Schema');
             // print_r($files);
             foreach ($files as $file) {
@@ -71,12 +54,12 @@ class Dbconnect
                         $table = $tblname;
                         $columns = "";
                         $counter = 0;
-                        print_r($data);
                         $col = $data[$table];
                         foreach ($col as $key => $value) {
                             $counter++;
                             if ($key === "FK") {
-                                $columns = $columns . "FOREIGN KEY (" . $value["ref_field"] . ")" . " REFERENCES " . $value["ref_table"] . "(" . $value["ref_table_field"] . ")";
+                                $columns = $columns . "FOREIGN KEY (" . $value["ref_field"] . ")" . " REFERENCES " .
+                                    $value["ref_table"] . "(" . $value["ref_table_field"] . ")";
                             } else {
                                 $columns = $columns . $key . " " . $value;
                             }
@@ -84,8 +67,12 @@ class Dbconnect
                                 $columns = $columns . ",";
                             }
                         }
-                        echo $createquery . $table . " (" . $columns . ")" . "\n";
-                        $this->connection->query($createquery . $table . " (" . $columns . ")");
+                        if ($this->connection->query($createquery . $table . " (" . $columns . ")")) {
+                            echo "Table $table created successfully";
+                        } else {
+                            echo "Error creating table: " . $this->connection->error;
+                        }
+                        ;
                     }
 
                 }

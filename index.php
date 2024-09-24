@@ -34,30 +34,38 @@ setheader("SMC");
 <script defer src="components/navbar/navbar.js" type="module"></script>
 <script defer src="js/index.js" type="module"></script>
 <?php
-if (isset($_SESSION["statusmsg"])) {
-  if ($_SESSION["statusmsg"] !== "Signup successful") {
-    switch ($_SESSION["statusmsg"]["form"]) {
-      case "signup":
-        echo '<script type="module">
+if (isset($_SESSION["attempts"]) && $_SESSION["attempts"] >= 3) {
+  echo '<script>
+  window.onload = function () {
+    alert("You have exceeded the maximum number of attempts. Please try again later.");
+  };
+  </script>';
+
+} else
+  if (isset($_SESSION["statusmsg"])) {
+    if ($_SESSION["statusmsg"] !== "Signup successful") {
+      switch ($_SESSION["statusmsg"]["form"]) {
+        case "signup":
+          echo '<script type="module">
       import { addModal } from "./components/navbar/navbar.js";
       addModal("components/Modals/signupModal/signupModal.php");
       </script>';
-        break;
-      case "login":
-        echo '<script type="module">
+          break;
+        case "login":
+          echo '<script type="module">
       import { addModal } from "./components/navbar/navbar.js";
       addModal("components/Modals/loginModal/loginModal.php");
       </script>';
-        break;
-    }
-    echo '<script>
+          break;
+      }
+      echo '<script>
   window.onload = function () {
     alert("' . $_SESSION["statusmsg"]["msg"] . '");
   };
   </script>';
-  }
+    }
 
-}
+  }
 unset($_SESSION["statusmsg"]);
 ?>
 

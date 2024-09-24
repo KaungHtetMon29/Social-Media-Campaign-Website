@@ -8,7 +8,7 @@
             <button id="joinus">Join Us</button>
         </div>
         <div>
-            <img src="img/hero.png" alt="heroimg" width="100%">
+            <img src="img/hero.png" alt="heroimg" class="indeximg">
         </div>
     </section>
     <div class="supporters">

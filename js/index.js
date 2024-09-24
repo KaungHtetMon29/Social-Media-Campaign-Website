@@ -7,7 +7,9 @@ const btn = document.getElementById("nav_container");
 burgerbtn.addEventListener("click", () => {
   btn.classList.toggle("active");
 });
+
 const overlaybtn = document.getElementById("overlaybtn");
+
 const overlay = document.getElementById("overlaycontent");
 overlaybtn.addEventListener("click", () => {
   overlay.classList.toggle("active");

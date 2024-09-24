@@ -51,13 +51,5 @@ setheader("Information");
 <?php
 unset($_SESSION["statusmsg"]);
 ?>
-<?php
-/*
-include 'components/Info/saferInternetDay/saferInternetDay.php';
-include 'components/Info/IWFcampaigns/IWFcampaigns.php';
-include 'components/Info/stopcyberbullying/stopcyberbullying.php';
-include 'components/Info/dianaaward/dianaaward.php';
-*/
-?>
 
 </html>

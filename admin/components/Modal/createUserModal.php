@@ -1,26 +1,3 @@
-<!-- <div class="modalbg">
-    <div class="admincard">
-        <div class="card-header">
-            <h3>Create User</h3>
-        </div>
-        <div class="card-body">
-            <form action="adminpanel.php" method="post">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" />
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="email" id="password" />
-                </div>
-                <div class="form-btn-group">
-                    <button class="admin-user-btn" type="submit" name="close" value="true">Close</button>
-                    <button class="admin-user-btn" type="submit" name="submit" value="true">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
 <?php
 
 
@@ -39,7 +16,10 @@ function createUserModal($type = false, $dbinstance)
         '<div class="modalbg">
             <div class="admincard">
                 <div class="card-header">
-                    <h2>Create User</h2>
+                    <h2>' . (array_key_exists('update', $params) ? ($params['update'] ? "Update " .
+                ($params['tab'] === "admin" ? "Admin" : "User") . "" :
+                "Create " . ($params['tab'] === "admin" ? "Admin" : "User") . "") :
+            "Create " . ($params['tab'] === "admin" ? "Admin" : "User") . "") . '</h2>
                     <form action="adminpanel.php" method="POST">
                         <button type="submit" name="close" value="' . $params["tab"] . '" class="adminmodal_close_btn">
                             <img src="../img/cross.svg" alt="button">
